@@ -1,0 +1,52 @@
+#include <iostream>
+#include <ctime>
+#include <fstream>
+#include <string>
+
+//fs.read(char *m,n);cчитать n символов
+//int pos=fs.tellag()
+// fs.seekg(poss+10)
+//fs.seekg(offset,ios_base::beg)
+//					        cur
+//							end
+using namespace std;
+
+int filesize(string a){
+	fstream fs(a);
+	if (fs.is_open() == false){
+		cout << 1;
+		system("pause");
+		return -1;
+	}
+	fs.seekg(0, ios_base::end);
+	int pos = fs.tellg();
+	fs.close();
+	return pos;
+}
+int s1(){
+	string a;
+	cout << "Write file name\n";
+	cin >> a;
+	ifstream fs(a,ios_base::binary);
+	if (fs.is_open() == false){
+		cout << 1;
+		system("pause");
+		return -1;
+	}
+	fs.seekg(14, ios_base::beg);
+	int c;
+	int q, b;
+	fs.read((char*)&c, 4);
+	if (c == 40){
+		fs.read((char*)&q, 4);
+		fs.read((char*)&b, 4);
+	}
+	cout << q << ' ' << b << endl;
+	fs.close();
+	return 0;
+}
+int main(){
+	s1();
+	system("pause");
+	return 0;
+}
