@@ -1,0 +1,244 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void swap(int *a, int *b){
+	int c = *a;
+	*a = *b;
+	*b = c;
+}
+
+void firstask(){
+	cout << "Введите первый момент времени в формате чч:мм:cc"<<endl;
+	int h1, h2, m1, m2, s1, s2;
+	cin >> h1 >> m1 >> s1;
+	cout << "Введите второй момент времени в формате чч:мм:cc" << endl;
+	cin >> h2 >> m2 >> s2;
+	int time1 = h1 * 60 * 60 + m1 * 60 + s1;
+	int time2 = h2 * 60 * 60 + m2 * 60 + s2;
+	if (time1 < time2){
+		swap(&time1, &time2);
+	}
+	time2 = time1-time2;
+	h2 = time2 / 3600;
+	time2 = time2 % 3600;
+	m2 = time2 / 60;
+	time2 = time2 % 60;
+	s2 = time2;
+	cout << "Пропежуток между данными моментами будет составлять " << h2 << "ч " << m2 << "м " << s2 << "с "<<endl;
+	
+}
+void secondask(){
+	cout << "Введите a" << endl;
+	float a;
+	cin >> a;
+	float z1, z2;
+	z1 = (1 - 2 * sin(a)*sin(a)) / (1 + sin(2 * a));
+	z2 = (1 - tan(a)) / (1 + tan(a));
+	cout << "z1 = " << z1 << endl << "z2 = " << z2 << endl;
+}
+void thirdask(){
+	cout << "Запишите коэффициенты при степенях"<<endl;
+	float a, b, c;
+	cin >> a >> b >> c;
+	float x1, x2;
+	x1 = (-b + sqrt(b*b - 4 * a*c)) / (2 * a);
+	x2 = (-b - sqrt(b*b - 4 * a*c)) / (2 * a);
+	cout << "x1 = " << x1 << endl << "x2 = " << x2 << endl;
+}
+void fourthask(){
+	cout << "Введите координаты точки" << endl;
+	float x, y;
+	cin >> x >> y;
+	if (y > 0){
+		if ((y <= (2 * x + 2))&(y <= (-2 * x + 2)))cout << "Да" << endl;
+		else cout << "Нет" << endl;
+	}
+	else{
+		if (y == 0) {
+			if (x >= -2 & x <= 2)cout << "Да" << endl;
+			else cout << "Нет" << endl;
+		}
+		else {
+			if ((x + 1)*(x + 1) + y*y <= 1 | (x - 1)*(x - 1) + y*y <= 1)  cout << "Да" << endl;
+			else cout << "Нет" << endl;
+		}
+	}
+}
+void fifthask(){
+	bool b = 1;
+	char day = 0;
+	cout << "Введите день недели" << endl;
+	while(b==1){
+		cin >> day;
+		switch (day)
+		{
+		case '1':cout << "Понедельник" << endl;
+			b = 0;
+			break;
+		case '2':cout << "Вторник" << endl;
+			b = 0;
+			break;
+		case '3':cout << "Среда" << endl;
+			b = 0;
+			break;
+		case '4':cout << "Четверг" << endl;
+			b = 0;
+			break;
+		case '5':cout << "Пятница" << endl;
+			b = 0;
+			break;
+		case '6':cout << "Суббота" << endl;
+			b = 0;
+			break;
+		case '7':cout << "Воскресенье" << endl;
+			b = 0;
+			break;
+		
+		default:cout << "Введены неверные данные, введите номер дня снова" << endl;
+			b = 1;
+			break;
+		}
+	} 
+}
+
+
+void sixthask(){
+	cout << "Введите дату в виде день/месяц/год" << endl;
+	int year, month, day;
+	cin >> day >> month >> year;
+	int m = month - 2;
+	if (m < 1){
+		if (m == 0)m = 12;
+		if (m == -1)m = 11;
+	}
+	int day1 = (day + ((13 * m - 1) / 5) + year % 100 + ((year % 100) / 4) + ((year / 100) / 4) + 777 - 2*(year / 100)) % 7;
+
+	if (day1 == 0)day1 = 7;
+	switch (day1)
+	{
+	case 1:cout << "Понедельник" << endl;
+
+		break;
+	case 2:cout << "Вторник" << endl;
+
+		break;
+	case 3:cout << "Среда" << endl;
+	
+		break;
+	case 4:cout << "Четверг" << endl;
+	
+		break;
+	case 5:cout << "Пятница" << endl;
+	
+		break;
+	case 6:cout << "Суббота" << endl;
+
+		break;
+	case 7:cout << "Воскресенье" << endl;
+	
+		break;
+
+	default:cout << "что-то тут не так...хм" << endl;
+
+		break;
+	}
+}
+
+void seventhask(){
+	cout << "Введите число не превышающее 4000" << endl;
+	int a;
+	cin >> a;
+	cout << "Число " << a << "в римской системе счисления:" << endl;
+	while (a >= 1000){
+		a -= 1000;
+		cout << 'M';
+	}
+	if (a >= 900){
+		a -= 900;
+		cout << "CM";
+	}
+	if (a >= 500){
+		a -= 500;
+		cout << 'D';
+	}
+	if (a >= 400){
+		a -= 400;
+		cout << "CD";
+	}
+	while (a >= 100){
+		a -= 100;
+		cout << 'C';
+	}
+	if (a >= 90){
+		a -= 90;
+		cout << "XC";
+	}
+	if (a >= 50){
+		a -= 50;
+		cout << 'L';
+	}
+	if (a >= 40){
+		a -= 40;
+		cout << "XL";
+	}
+	while (a >= 10){
+		a -= 10;
+		cout << 'X';
+	}
+	if (a == 9){
+		cout << "IX";
+		a = 0;
+	}
+	if (a >= 5){
+		a -= 5;
+		cout << 'V';
+	}
+	if (a == 4){
+		cout << "IV";
+		a = 0;
+	}
+	while (a > 0){
+		--a;
+		cout << 'I';
+	}
+	cout << endl;
+}
+
+int main(){
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите номер задачи" << endl;
+	short questionnumber;
+	bool b = 0;
+	while (b == 0){
+		cin >> questionnumber;
+		switch (questionnumber)
+		{
+		case 1:firstask();
+			b = 1;
+			break;
+		case 2:secondask();
+			b = 1;
+			break;
+		case 3:thirdask();
+			b = 1;
+			break;
+		case 4:fourthask();
+			b = 1;
+			break;
+		case 5:fifthask();
+			b = 1;
+			break;
+		case 6:sixthask();
+			b = 1;
+			break;
+		case 7:seventhask();
+			b = 1;
+			break;
+		default:cout << "Такой задачи не существует в базе, повторите попытку" << endl;
+			break;
+		}
+	}
+	system("pause");
+	return 0;
+}
